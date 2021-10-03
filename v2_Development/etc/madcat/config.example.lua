@@ -36,7 +36,7 @@
 user = "user" --user to drop privileges to.
 group = "user" --group is only needed by python modules
 interface = "lo" --interface to listen on, choose loopback device for local test, even on external IP
-hostaddress = "192.168.2.99" --address to listen on
+hostaddress = "192.168.1.99" --address to listen on
 tcp_listening_port = "65535" --TCP-Port to listen on
 tcp_connection_timeout = "5" --Timout for TCP-Connections
 --LEGACY v1: Paths for Files containing Payload: Must end with trailing "/", will be handled as prefix otherwise.
@@ -72,11 +72,11 @@ udpproxy = { -- [<listen port>] = { "<backend IP>", <backend Port> },
 con_wait = 10 --Time to wait before a connection is processed to ensure that the matching SYN is present in syn_dict. 10 + DEF_CON_WAIT is default.
 syn_timeout =  70 --60 + CON_WAIT: Time after which a SYN not yet matched with a connection is interpreted as SYN-SCAN. 60 + DEF_CON_WAIT is default.
 syn_wait_proxy =  100 --30 + SYN_TIMEOUT: Time to wait before a connection proxied by TCP/IP Portmonitor is processed to ensure that the matching Connection is present in con_dict. 30 + DEF_SYN_TIMEOUT is default.
-header_fifo = "/tmp/header_json.tpm" --Named pipe with TCP-IP Header information, namely SYN
-connection_fifo = "/tmp/connect_json.tpm" --Named pipe with connection information
+header_fifo = "/data//tmp/header_json.tpm" --Named pipe with TCP-IP Header information, namely SYN
+connection_fifo = "/data//tmp/connect_json.tpm" --Named pipe with connection information
 
 --Enrichtment Processor configuration
-madcatlog_fifo = "/tmp/logs.erm" --Named pipe for MADCAT logs
+madcatlog_fifo = "/data//tmp/logs.erm" --Named pipe for MADCAT logs
 dns_server = "resolver1.opendns.com" --DNS Serer for external IP encrichtment
 extip_dnsname = "myip.opendns.com" --DNS name which returns own IP
 acquire_interval = 600 --Interval for data aquisition

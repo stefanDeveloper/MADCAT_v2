@@ -73,9 +73,9 @@ DEF_BEST_GUESS_TIMEOUT = DEF_SYN_TIMEOUT - 10
 DEF_SYN_EMPTY_QUEUE = False
 
 # Named pipe with TCP-IP Header information, namely SYN
-DEF_HEADER_FIFO = "/tmp/header_json.tpm"
+DEF_HEADER_FIFO = "/data/tmp/header_json.tpm"
 # Named pipe with connection information
-DEF_CONNECTION_FIFO = "/tmp/connect_json.tpm"
+DEF_CONNECTION_FIFO = "/data/tmp/connect_json.tpm"
 # User and Group to drop priviliges to.
 DEF_USER = "user"
 DEF_GROUP = "user"
