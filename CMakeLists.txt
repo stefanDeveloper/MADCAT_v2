@@ -202,8 +202,8 @@ endif()
 
 if(CMAKE_TESTS)
   message(STATUS "Enable tests")
+  option(MADCAT_TEST "Enable tests building" ON)
 endif()
-option(MADCAT_TEST "Enable tests building" ON)
 # Set directory for libraries and executables
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/bin")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/lib")
