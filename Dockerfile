@@ -84,6 +84,4 @@ RUN mkdir /data/tmp && \
     mkdir /data/ipm && \
     mkdir /data/upm 
 
-
-
 CMD ["/opt/portmonitor/run_madcat.sh"]
