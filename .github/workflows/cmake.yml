@@ -20,7 +20,36 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-
+    
+    - name: Prepare
+      run: sudo apt-get install -y \
+            gcc \
+            cmake \
+            build-essential \
+            libpcap0.8 libpcap-dev \
+            liblua5.1-0 \
+            liblua5.1-0-dev \
+            libssl1.1 \
+            libssl-dev \
+            python3-dev \
+            conntrack \
+            auditd \
+            audispd-plugins \
+            audit.d \
+            net-tools \
+            gdb \
+            pkg-config \
+            strace \
+            valgrind \
+            python3-pip \
+            iptables \
+            git \
+            sudo \
+            python-apt \
+            python3-distutils-extra \
+            python3-apt \
+            telnet
+           
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
