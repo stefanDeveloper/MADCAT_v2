@@ -35,13 +35,4 @@ jobs:
       
     - name: make
       run: make -C ${{github.workspace}}/build
-    
-    - name: make check
-      run: make check -C ${{github.workspace}}/build
-    
-    - name: make distcheck
-      run: make distcheck -C ${{github.workspace}}/build
-
-      
-    
       
