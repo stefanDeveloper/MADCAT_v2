@@ -45,6 +45,10 @@ This file is part of MADCAT, the Mass Attack Detection Acceptance Tool.
 #define HEADER_FIFO "/data/tmp/header_json.tpm"
 #define CONNECT_FIFO "/data/tmp/connect_json.tpm"
 
+// #define HEADER_FIFO "/tmp/header_json.tpm"
+// #define CONNECT_FIFO "/tmp/connect_json.tpm"
+
+
 #define PCN_STRLEN 6 //listen- and backport string length in proxy_conf_tcp_node_t
 #define STR_BUFFER_SIZE 65536 //Generic string buffer size
 

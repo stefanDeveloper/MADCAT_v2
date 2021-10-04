@@ -60,8 +60,8 @@ This file is part of MADCAT, the Mass Attack Detection Acceptance Tool.
 #include <stdarg.h>
 #include <sys/file.h>
 #include <openssl/sha.h>
-#include <lua5.1/lauxlib.h>
-#include <lua5.1/lualib.h>
+#include <lauxlib.h>
+#include <lualib.h>
 #include <sys/stat.h>
 #include <pcap.h>
 #include <sys/types.h>

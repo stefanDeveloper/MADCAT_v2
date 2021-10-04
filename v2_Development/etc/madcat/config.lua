@@ -36,9 +36,9 @@
 loglevel = "0" --optional: loglevel (0: Default logging no source IPs to stderr, 1: Full logging, >=2: Debug)
 user = "user" --user to drop privileges to.
 group = "user" --group is only needed by python modules
-interface = "eth0" --interface to listen on, choose loopback device for local test, even on external IP
+interface = "enp5s0" --interface to listen on, choose loopback device for local test, even on external IP
 -- interface = "wlp8s0" --interface to listen on, choose loopback device for local test, even on external IP
-hostaddress = "192.168.1.99" --address to listen on
+hostaddress = "192.168.2.71" --address to listen on
 tcp_listening_port = "65535" --TCP-Port to listen on
 tcp_connection_timeout = "5" --Timout for TCP-Connections
 

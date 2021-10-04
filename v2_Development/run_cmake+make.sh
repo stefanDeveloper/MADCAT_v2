@@ -2,7 +2,7 @@
 function native {
   echo ====== native ======
   cmake -Bbuild
-  cd build
+  cd build || exit
   make
   cd ..
 }
@@ -10,7 +10,7 @@ function native {
 function armhf {
   echo ======  armhf =====
   cmake -DCMAKE_TARGET=armhf -Bbuild-armhf
-  cd build-armhf
+  cd build-armhf || exit
   make
   cd ..
 }
@@ -18,7 +18,7 @@ function armhf {
 function aarch64 {
   echo ===== aarch64 =====
   cmake -DCMAKE_TARGET=aarch64 -Bbuild-aarch64
-  cd build-aarch64
+  cd build-aarch64 || exit
   make
   cd ..
 }
