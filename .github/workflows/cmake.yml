@@ -37,7 +37,4 @@ jobs:
       run: make -C ${{github.workspace}}/build
 
     - name: test
-      run: | 
-           cd v2_Development/tests && 
-           cmake -B ${{github.workspace}}/tests -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} &&
-           cmake --build ${{github.workspace}}/tests --config ${{env.BUILD_TYPE}}
+      run: cd v2_Development && cmake -CMAKE_TEST
