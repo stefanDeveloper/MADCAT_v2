@@ -4,3 +4,5 @@ build-aarch64
 build-armhf
 uninstall.sh
 __pycache__
+CMakeFiles
+*.txt
