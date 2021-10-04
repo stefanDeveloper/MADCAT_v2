@@ -15,5 +15,5 @@ sleep 1
 # Give TCP-Module some time to start up and open configured FIFOs /madcat/confifo.tpm and /madcat/hdrfifo.tpm
 sleep 1
 # Start TCP Postprocessor, let it pipe results to Enrichment Processor FIFO.
-/usr/bin/python3 /opt/portmonitor/tcp_ip_port_mon_postprocessor.py /etc/madcat/config.lua 2>>/data/error.tcppost.log 1>>/data/tmp/logs.erm
+/usr/bin/python3 /opt/portmonitor/tcp_ip_port_mon_postprocessor.py /etc/madcat/config.lua 2>>/data/error.tcppost.log 1>>/data/tmp/logs.erm &
 /usr/bin/python3 /opt/portmonitor/monitoring/monitoring.py
