@@ -37,14 +37,13 @@ RUN apt-get install -y \
 RUN pip3 install psutil setuptools
 RUN pip3 install luaparser split
 
-ADD v2_Development /v2_Development
-RUN ls -lt /
+RUN git clone https://github.com/stefanDeveloper/MADCAT_v2_docker.git /madcat
 
-RUN cd /v2_Development && \
-    cmake -Bbuild . && \
+RUN cd /madcat && \
+    cmake -B build . && \
     make
 
-RUN cd /v2_Development && \
+RUN cd /madcat && \
     cp -r etc/madcat /etc/ && \
     mkdir /opt/portmonitor && \
     cp scripts/run_madcat.sh /opt/portmonitor && \
