@@ -37,4 +37,4 @@ jobs:
       run: make -C ${{github.workspace}}/build
 
     - name: Test
-      run: cd v2_Development && rm -rf ${{github.workspace}}/build && cmake -CMAKE_TEST
+      run: cd v2_Development && ls -lt && rm -rf ${{github.workspace}}/build && cmake -CMAKE_TEST
