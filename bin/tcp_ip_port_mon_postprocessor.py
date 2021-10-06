@@ -46,7 +46,8 @@ from luaparser import ast, astnodes
 import subprocess
 
 ########################## DEFAULT CONFIGURATION ##########################
-DEF_HOSTADDRESS = "WARNING: \"hostaddress\" is not set, thus making conntrack unusable if enabled!"
+# DEF_HOSTADDRESS = "WARNING: \"hostaddress\" is not set, thus making conntrack unusable if enabled!"
+DEF_HOSTADDRESS = "192.168.2.71"
 # Time to wait before a connection is processed to ensure that the
 # matching SYN is present in syn_dict. Nothing to to with ICBMs. 10 +
 # DEF_CON_WAIT is default.
@@ -73,9 +74,9 @@ DEF_BEST_GUESS_TIMEOUT = DEF_SYN_TIMEOUT - 10
 DEF_SYN_EMPTY_QUEUE = False
 
 # Named pipe with TCP-IP Header information, namely SYN
-DEF_HEADER_FIFO = "/data/tmp/header_json.tpm"
+DEF_HEADER_FIFO = "/tmp/header_json.tpm"
 # Named pipe with connection information
-DEF_CONNECTION_FIFO = "/data/tmp/connect_json.tpm"
+DEF_CONNECTION_FIFO = "/tmp/connect_json.tpm"
 # User and Group to drop priviliges to.
 DEF_USER = "user"
 DEF_GROUP = "user"

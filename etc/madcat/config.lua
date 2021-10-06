@@ -89,11 +89,11 @@ syn_empty_queue = 0 --Wait for a connection to be marked as "no_syn" until the S
 best_guess = 0 --Enable Best Guess Method for Connection Objects with altered src_port because of use of DNAT. Uses only src_ip and dest_port for matching to prevent objects with "event_type": "no_syn" (0 = False, 1 = True). Mostly useless if conntrack is enabled.
 best_guess_timeout = 60 --Time to wait before using Best Guess Method. Default is syn_timeout-10, smaller then syn_timeout, of course.
 ----Input FIFOs for TCP Postprocessor:
-header_fifo = "/data/tmp/header_json.tpm" --Named pipe with TCP-IP Header information, namely SYN
-connection_fifo = "/data/tmp/connect_json.tpm" --Named pipe with connection information
+header_fifo = "/tmp/header_json.tpm" --Named pipe with TCP-IP Header information, namely SYN
+connection_fifo = "/tmp/connect_json.tpm" --Named pipe with connection information
 
 --Enrichtment Processor configuration
-madcatlog_fifo = "/data/tmp/logs.erm" --Named pipe for MADCAT logs
+madcatlog_fifo = "/tmp/logs.erm" --Named pipe for MADCAT logs
 dns_server = "resolver1.opendns.com" --DNS Serer for external IP encrichtment
 extip_dnsname = "myip.opendns.com" --DNS name which returns own IP
 acquire_interval = 300 --Interval for data aquisition
