@@ -6,12 +6,10 @@ networks:
 services:
   madcat:
       container_name: madcat
-      # restart: always
+      restart: always
       network_mode: "host"
       tmpfs:
         - /tmp
-      # cap_add:
-      #  - NET_ADMIN
       build: .
       image: "madcat:2021"
       volumes:
