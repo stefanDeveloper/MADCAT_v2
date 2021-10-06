@@ -1,6 +1,8 @@
 FROM ubuntu:18.04 
 MAINTAINER stefan-machmeier@outlook.com
 
+USER root
+
 # Setup apt
 RUN apt-get update && \
     apt-get update -y && \
@@ -34,10 +36,9 @@ RUN apt-get install -y \
     python3-apt \
     telnet
     
-RUN pip3 install psutil setuptools
-RUN pip3 install luaparser split
+RUN pip3 install psutil setuptools luaparser split
 
-RUN git clone https://github.com/stefanDeveloper/MADCAT_v2_docker.git /madcat
+ADD . /madcat
 
 RUN cd /madcat && \
     cmake -B build . && \
@@ -62,10 +63,11 @@ RUN cd /madcat && \
     chmod +x /opt/portmonitor/enrichment_processor.py && \
     chmod +x /opt/portmonitor/monitoring/monitoring.py && \
     chmod +x /opt/portmonitor/tcp_ip_port_mon_postprocessor.py && \
-    chmod +x /opt/portmonitor/run_madcat.sh 
+    chmod a+x /opt/portmonitor/run_madcat.sh 
 
 RUN \
-    groupadd -g 999 user && useradd -u 999 -g user -G sudo -m -s /bin/bash user && \
+    groupadd --gid 999 user && \
+    useradd --uid 999 --gid user -G sudo -m --shell /bin/bash user && \
     sed -i /etc/sudoers -re 's/^%sudo.*/%sudo ALL=(ALL:ALL) NOPASSWD: ALL/g' && \
     sed -i /etc/sudoers -re 's/^root.*/root ALL=(ALL:ALL) NOPASSWD: ALL/g' && \
     sed -i /etc/sudoers -re 's/^#includedir.*/## **Removed the include directive** ##"/g' && \
@@ -73,14 +75,15 @@ RUN \
     echo "Customized the sudoers file for passwordless access to the user user!" && \
     echo "user user:";  su - user -c id
 
-USER root
-
-
 RUN mkdir /var/run/madcat && \
     mkdir /data
 
-RUN mkdir /data/tmp && \
-    mkdir /data/ipm && \
-    mkdir /data/upm 
+RUN mkdir /data/ipm && \
+    mkdir /data/upm && \
+    mkdir /data/tpm
 
-CMD ["/opt/portmonitor/run_madcat.sh"]
+RUN chown -R user:user /data
+
+USER user:user
+
+CMD ["sudo", "/opt/portmonitor/run_madcat.sh"]

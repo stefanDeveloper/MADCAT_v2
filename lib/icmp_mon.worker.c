@@ -323,8 +323,11 @@ int worker_icmp(unsigned char* buffer, int recv_len, char* hostaddress, char* da
     if(ipv4icmp.data_len - data_offset > 0 || tainted) { //data_offset is left = 0 if tainted
         //Generate filename LinuxTimeStamp-milisecends_destinationAddress-destinationPort_sourceAddress-sourcePort.tpm
         sprintf(file_name, "%s%s_%s_%s-%u_%u.ipm", data_path, log_time, ipv4icmp.dest_ip_str, ipv4icmp.src_ip_str, ipv4icmp.type, ipv4icmp.code);
+        //sprintf(file_name, "%s.ipm", ipv4icmp.dest_ip_str);
         file_name[PATH_LEN-1] = 0; //Enforcing PATH_LEN
+        fprintf(stderr, "%s\n",file_name);
         file = fopen(file_name,"wb"); //Open File
+        fprintf (stderr, "  err %d \n", errno);
         //Write when -and only WHEN - nothing went wrong data to file
         if (file != 0) {
             if(loglevel > 0) {

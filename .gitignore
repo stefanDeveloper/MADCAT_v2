@@ -6,3 +6,4 @@ uninstall.sh
 __pycache__
 CMakeFiles
 *.txt
+data

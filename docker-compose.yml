@@ -1,0 +1,21 @@
+version: '2.3'
+
+networks:
+  madcat_local:
+
+services:
+  madcat:
+      container_name: madcat
+      # restart: always
+      network_mode: "host"
+      tmpfs:
+        - /tmp
+      # cap_add:
+      #  - NET_ADMIN
+      build: .
+      image: "madcat:2021"
+      volumes:
+        - ./data/:/data
+        - ./data/ipm/:/data/ipm
+        - ./data/upm/:/data/upm
+        - ./data/tpm/:/data/tpm
