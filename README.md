@@ -58,13 +58,20 @@ Either run it in an own docker network:
 # Create network
 docker network create --subnet=192.168.1.0/24 madcat-net
 # Docker run command
-docker run --name madcat --cap-add=NET_ADMIN --net madcat-net --ip 192.168.1.99 madcat:latest
+docker run --name madcat \
+           --cap-add=NET_ADMIN \
+           --net madcat-net \
+           --ip 192.168.1.99 \
+           madcat:latest
 ```
 
 Or run it on host network:
 
 ```sh
-docker run --name madcat --cap-add=NET_ADMIN --net=host madcat:latest
+docker run --name madcat \
+           --cap-add=NET_ADMIN \
+           --net=host \
+           madcat:latest
 ```
 
 ## Requirements
@@ -116,15 +123,24 @@ sudo apt-get install gdb pkg-config strace valgrind
 
 ## How to compile
 
-MADCAT is compiled with cmake and make. It is also prepared for cross-compilation for the target architectures armhf and aarch64.
-Example commands can be found in `run_cmake+make.sh`
+MADCAT is compiled with cmake and make. 
+
+```sh
+cmake -Bbuild
+cd build || exit
+make
+cd ..
+```
+
+It is also prepared for cross-compilation for the target architectures armhf and aarch64. Example commands can be found in `run_cmake+make.sh`
 
 ## How to use
 
 To succesfull run MADCAT you need a dedicated interface. An example configuration can be found in [`./etc/madcat/config.lua`](./etc/madcat/config.lua), which must be customized for your needs and your environment.
 
-For the TCP Module to work with all destination ports yout need to set a DNAT-Rule.Given your local hostaddress is 192.168.1.100 and
-the configured port MADCAT is running on is 65535 on interface enp0s8, this would be something like:
+For the TCP Module to work with all destination ports yout need to set a DNAT-Rule.
+Given your local hostaddress is `192.168.1.100` and
+the configured port MADCAT is running on is `65535` on interface `enp0s8`:
 
 ```sh
 # Host machine has IP 192.168.1.100
@@ -155,23 +171,18 @@ If you encounter e.g. libc-releated errors in your cross compiling evironment, s
 
 MADCAT has been released under GPLv3, see LICENSE.md
 
-RSP - A Really Simple Proxy by Giles Thomas
+- RSP - A Really Simple Proxy by Giles Thomas
 GitHub: https://github.com/gpjt/rsp
 LICENSE: MIT
 Documentation: http://www.gilesthomas.com/2013/08/writing-a-reverse-proxyloadbalancer-from-the-ground-up-in-c-part-0/
 Gratefully adopted and modified for MADCAT with special thanks to Giles Thomas.
 
-apt-check Macro by Michiel Sikkes <michiel@eyesopened.nl>, Michael Vogt <mvo@debian.org>, Scott James Remnant <scott@ubuntu.com>
+- apt-check Macro by Michiel Sikkes <michiel@eyesopened.nl>, Michael Vogt <mvo@debian.org>, Scott James Remnant <scott@ubuntu.com>
 Git: https://git.launchpad.net/update-notifier/tree/data/apt_check.py
 LICENSE: GPLv2
 
-https://www.bsi.bund.de
+- https://www.bsi.bund.de
 
-https://github.com/BSI-Bund/
+- https://github.com/BSI-Bund/
 
-https://www.gilesthomas.com/
-
-https://www.elastic.co/
-
-https://www.elastic.co/de/beats/filebeat
-
+- https://www.gilesthomas.com/
