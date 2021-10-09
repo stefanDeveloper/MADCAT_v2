@@ -9,7 +9,7 @@ fi
 # iptables -I OUTPUT -p icmp --icmp-type destination-unreachable -j DROP
 
 # Start Enrichment Processor, piping results to /data/portmonitor.log
-/usr/bin/python3 /opt/portmonitor/enrichment_processor.py -D /etc/madcat/config.lua  2>/data/error.enrichment.log 1>/data/portmonitor.log &
+/usr/bin/python3 /opt/portmonitor/enrichment_processor.py /etc/madcat/config.lua  2>>/data/error.enrichment.log 1>>/data/portmonitor.log &
 # Give Enrichment Processor time to start up and open /tmp/logs.erm as configured
 sleep 1
 

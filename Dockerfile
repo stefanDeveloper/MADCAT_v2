@@ -82,7 +82,7 @@ RUN mkdir /data/ipm && \
     mkdir /data/upm && \
     mkdir /data/tpm
 
-RUN chown -R user:user /data
+# RUN chown -R user:user /data
 
 USER user:user
 
