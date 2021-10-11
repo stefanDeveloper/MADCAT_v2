@@ -86,8 +86,9 @@ PROCESS_LIST = ["auditd",
 
 CHECK_NETWORKUSAGE = True #Alerts, when network usage exceeds the average of NETUSAGE_ALERT Bytes per second, measured in TIME_HEARTBEAT seconds
 NETUSAGE_ALERT = 1000000
-NETWORK_LIST = ["wlp8s0", "enp9s0"]
-#NETWORK_LIST = [ "enp2s0", "enx0008bbfd87f4"]
+NETWORK_LIST = ["enp5s0"]
+# NETWORK_LIST = ["wlp8s0", "enp9s0"]
+# NETWORK_LIST = [ "enp2s0", "enx0008bbfd87f4"]
 
 CHECK_LISTNERS = True
 #Whitelist of ports on which listners are allowed, empty to prevent alerts and set it to informational ("None")

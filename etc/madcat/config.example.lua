@@ -50,20 +50,19 @@ proxy_wait_restart = "2" --optional: time to wait before a crashed TCP proxy res
 --Optional filter expresion for RAW module, defaults to none (empty string).
 --Syntax: https://www.tcpdump.org/manpages/pcap-filter.7.html
 --Example for catching IPv6 inbound and no IPv6 multicast packets:
--- raw_pcap_filter_exp = "(not ip6 multicast) and inbound and ip6"
 raw_pcap_filter_exp = "(not ip6 multicast) and inbound and ip6"
 --TCP Proxy configuration
 tcpproxy = { -- [<listen port>] = { "<backend IP>", <backend Port> },
-            [222]   = { "192.168.2.50", 22 },
-            [2222]  = { "192.168.2.50", 222 },
-            [80]    = { "192.168.2.50", 8080 },
-            [64000] = { "192.168.2.50", 64000 },
+            [222]   = { "192.168.1.99", 22 },
+            [2222]  = { "192.168.1.99", 222 },
+            [80]    = { "192.168.1.99", 8080 },
+            [64000] = { "192.168.1.99", 64000 },
            }
 --UDP Proxy configuration
-udpproxy_tobackend_addr = "192.168.2.199" --Local address to communicate to backends with. Mandatory, if "udpproxy" is configured.
+udpproxy_tobackend_addr = "192.168.2.99" --Local address to communicate to backends with. Mandatory, if "udpproxy" is configured.
 udpproxy_connection_timeout = "5" --Timeout for UDP "Connections". Optional, but only usefull if "udpproxy" is configured.
 udpproxy = { -- [<listen port>] = { "<backend IP>", <backend Port> },
-            [64000] = { "192.168.2.50", 55555 },
+            [64000] = { "192.168.1.99", 55555 },
             [533]   = { "8.8.4.4", 53},
             [534]   = { "8.8.8.8", 53},
            }

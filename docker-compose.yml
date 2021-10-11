@@ -1,21 +1,22 @@
 version: '2.3'
 
-networks:
-  madcat_local:
-
 services:
   madcat:
       container_name: madcat
-      # restart: always
+      restart: always
       network_mode: "host"
+      cap_add:
+        - NET_ADMIN
       tmpfs:
         - /tmp
-      # cap_add:
-      #  - NET_ADMIN
       build: .
-      image: "madcat:2021"
+      image: "madcat:2022"
+      environment:
+        - HOSTADDRESS=192.168.2.75
       volumes:
         - ./data/:/data
         - ./data/ipm/:/data/ipm
         - ./data/upm/:/data/upm
         - ./data/tpm/:/data/tpm
+        - ./etc/madcat/config.lua:/etc/madcat/config.lua
+        - ./etc/madcat/monitoring_config.py:/etc/madcat/monitoring_config.py

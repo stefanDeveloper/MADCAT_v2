@@ -47,7 +47,7 @@ import subprocess
 
 ########################## DEFAULT CONFIGURATION ##########################
 # DEF_HOSTADDRESS = "WARNING: \"hostaddress\" is not set, thus making conntrack unusable if enabled!"
-DEF_HOSTADDRESS = "192.168.2.71"
+DEF_HOSTADDRESS = os.environ.get('HOSTADDRESS')
 # Time to wait before a connection is processed to ensure that the
 # matching SYN is present in syn_dict. Nothing to to with ICBMs. 10 +
 # DEF_CON_WAIT is default.
@@ -763,6 +763,7 @@ def main(argv):
     global DEF_GROUP
     global output_accepted_con_th_firstrun_evt, syn_dict, con_dict, ct_syn_dict
     #global no_syn_dict, syn_scan_dict
+
 
     logtime = datetime.now().astimezone().isoformat()
     starttime = time.time()

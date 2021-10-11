@@ -56,13 +56,15 @@ Either run it in an own docker network:
 
 ```sh
 # Create network
-docker network create --subnet=192.168.1.0/24 madcat-net
+docker network create --subnet=192.168.2.0/24 madcat-net2
 # Docker run command
 docker run --name madcat \
-           --cap-add=NET_ADMIN \
            --net madcat-net \
-           --ip 192.168.1.99 \
-           madcat:latest
+           --ip 192.168.2.72 \
+           -v "/home/stefan/Documents/git/MADCAT_v2/data/:/data" \
+           -v "/home/stefan/Documents/git/MADCAT_v2/data/ipm/:/data/ipm" \
+           -v "/home/stefan/Documents/git/MADCAT_v2/data/tpm/:/data/tpm" \
+           madcat:2021
 ```
 
 Or run it on host network:
@@ -71,7 +73,10 @@ Or run it on host network:
 docker run --name madcat \
            --cap-add=NET_ADMIN \
            --net=host \
-           madcat:latest
+           -v "/home/stefan/Documents/git/MADCAT_v2/data/:/data" \
+           -v "/home/stefan/Documents/git/MADCAT_v2/data/ipm/:/data/ipm" \
+           -v "/home/stefan/Documents/git/MADCAT_v2/data/tpm/:/data/tpm" \
+           madcat:2021
 ```
 
 ## Requirements
