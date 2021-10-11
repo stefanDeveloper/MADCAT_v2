@@ -84,6 +84,6 @@ RUN mkdir /data/ipm && \
 
 # RUN chown -R user:user /data
 
-USER user:user
+USER root
 
-CMD ["sudo", "/opt/portmonitor/run_madcat.sh"]
+CMD ["/opt/portmonitor/run_madcat.sh"]

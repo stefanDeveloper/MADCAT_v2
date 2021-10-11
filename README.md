@@ -73,7 +73,10 @@ Or run it on host network:
 docker run --name madcat \
            --cap-add=NET_ADMIN \
            --net=host \
-           madcat:latest
+           -v "/home/stefan/Documents/git/MADCAT_v2/data/:/data" \
+           -v "/home/stefan/Documents/git/MADCAT_v2/data/ipm/:/data/ipm" \
+           -v "/home/stefan/Documents/git/MADCAT_v2/data/tpm/:/data/tpm" \
+           madcat:2021
 ```
 
 ## Requirements

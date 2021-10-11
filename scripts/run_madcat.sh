@@ -5,8 +5,8 @@ if ! [ "$(id -u)" = 0 ]; then
 fi
 
 #Set iptables rules for TCP- and UDP-Modules
-# iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 1:65534 -j DNAT --to 192.168.2.71:65535
-# iptables -I OUTPUT -p icmp --icmp-type destination-unreachable -j DROP
+iptables -t nat -A PREROUTING -i enp5s0 -p tcp --dport 1:65534 -j DNAT --to 192.168.2.75:65535
+iptables -I OUTPUT -p icmp --icmp-type destination-unreachable -j DROP
 
 # Start Enrichment Processor, piping results to /data/portmonitor.log
 /usr/bin/python3 /opt/portmonitor/enrichment_processor.py /etc/madcat/config.lua  2>>/data/error.enrichment.log 1>>/data/portmonitor.log &
@@ -45,7 +45,7 @@ fi
 
 # Change file permission, currently a workaround!
 chown -R user:user /data/ipm
-chown -R user:user /data/tpm
+# chown -R user:user /data/tpm
 chown -R user:user /data/upm
 
 # Give TCP-Module some time to start up and open configured FIFOs /madcat/confifo.tpm and /madcat/hdrfifo.tpm

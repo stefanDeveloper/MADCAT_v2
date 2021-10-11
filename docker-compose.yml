@@ -16,3 +16,4 @@ services:
         - ./data/ipm/:/data/ipm
         - ./data/upm/:/data/upm
         - ./data/tpm/:/data/tpm
+        - ./etc/madcat/config.lua:/etc/madcat/config.lua
