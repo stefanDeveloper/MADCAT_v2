@@ -61,9 +61,11 @@ docker network create --subnet=192.168.2.0/24 madcat-net2
 docker run --name madcat \
            --net madcat-net \
            --ip 192.168.2.72 \
-           -v "/home/stefan/Documents/git/MADCAT_v2/data/:/data" \
-           -v "/home/stefan/Documents/git/MADCAT_v2/data/ipm/:/data/ipm" \
-           -v "/home/stefan/Documents/git/MADCAT_v2/data/tpm/:/data/tpm" \
+           -v "$(pwd)/data/:/data" \
+           -v "$(pwd)/data/ipm/:/data/ipm" \
+           -v "$(pwd)/data/tpm/:/data/tpm" \
+           -v "$(pwd)/etc/madcat/config.lua:/etc/madcat/config.lua" \
+           -v "$(pwd)/etc/madcat/monitoring_config.py:/etc/madcat/monitoring_config.py" \
            madcat:2021
 ```
 
@@ -73,9 +75,11 @@ Or run it on host network:
 docker run --name madcat \
            --cap-add=NET_ADMIN \
            --net=host \
-           -v "/home/stefan/Documents/git/MADCAT_v2/data/:/data" \
-           -v "/home/stefan/Documents/git/MADCAT_v2/data/ipm/:/data/ipm" \
-           -v "/home/stefan/Documents/git/MADCAT_v2/data/tpm/:/data/tpm" \
+           -v "$(pwd)/data/:/data" \
+           -v "$(pwd)/data/ipm/:/data/ipm" \
+           -v "$(pwd)/data/tpm/:/data/tpm" \
+           -v "$(pwd)/etc/madcat/config.lua:/etc/madcat/config.lua" \
+           -v "$(pwd)/etc/madcat/monitoring_config.py:/etc/madcat/monitoring_config.py" \
            madcat:2021
 ```
 
