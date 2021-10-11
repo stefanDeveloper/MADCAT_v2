@@ -11,6 +11,8 @@ services:
         - /tmp
       build: .
       image: "madcat:2022"
+      environment:
+        - HOSTADDRESS=192.168.2.75
       volumes:
         - ./data/:/data
         - ./data/ipm/:/data/ipm
