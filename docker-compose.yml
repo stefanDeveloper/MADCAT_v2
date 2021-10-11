@@ -19,3 +19,4 @@ services:
         - ./data/upm/:/data/upm
         - ./data/tpm/:/data/tpm
         - ./etc/madcat/config.lua:/etc/madcat/config.lua
+        - ./etc/madcat/monitoring_config.py:/etc/madcat/monitoring_config.py

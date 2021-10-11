@@ -45,7 +45,7 @@ fi
 
 # Change file permission, currently a workaround!
 chown -R user:user /data/ipm
-# chown -R user:user /data/tpm
+chown -R user:user /data/tpm
 chown -R user:user /data/upm
 
 # Give TCP-Module some time to start up and open configured FIFOs /madcat/confifo.tpm and /madcat/hdrfifo.tpm
