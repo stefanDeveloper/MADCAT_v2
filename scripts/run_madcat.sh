@@ -6,7 +6,7 @@ fi
 service rsyslog start
 
 #Set iptables rules for TCP- and UDP-Modules
-iptables -t nat -A PREROUTING -i enp5s0 -p tcp --dport 1:65534 -j DNAT --to 192.168.2.75:65535
+iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 1:65534 -j DNAT --to 192.168.145.7:65535
 iptables -I OUTPUT -p icmp --icmp-type destination-unreachable -j DROP
 
 # Start Enrichment Processor, piping results to /data/portmonitor.log
