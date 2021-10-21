@@ -36,9 +36,9 @@
 loglevel = "0" --optional: loglevel (0: Default logging no source IPs to stderr, 1: Full logging, >=2: Debug)
 user = "user" --user to drop privileges to.
 group = "user" --group is only needed by python modules
-interface = "enp5s0" --interface to listen on, choose loopback device for local test, even on external IP
+interface = "eth0" --interface to listen on, choose loopback device for local test, even on external IP
 -- interface = "eth0" --interface to listen on, choose loopback device for local test, even on external IP
-hostaddress = "192.168.2.75" --address to listen on
+hostaddress = "192.168.145.7" --address to listen on
 tcp_listening_port = "65535" --TCP-Port to listen on
 tcp_connection_timeout = "5" --Timout for TCP-Connections
 
@@ -61,17 +61,17 @@ raw_pcap_filter_exp = "(not ip6 multicast) and inbound and ip6"
 
 --TCP Proxy configuration
 --tcpproxy = { -- [<listen port>] = { "<backend IP>", <backend Port> },
---            [222]   = { "192.168.2.75", 22 },
---            [2222]  = { "192.168.2.75", 222 },
---            [80]    = { "192.168.2.75", 8080 },
---            [6400] = { "192.168.2.75", 6400 },
---            [443]  = { "192.168.2.75", 443}
+--            [222]   = { "192.168.145.7", 22 },
+--            [2222]  = { "192.168.145.7", 222 },
+--            [80]    = { "192.168.145.7", 8080 },
+--            [6400] = { "192.168.145.7", 6400 },
+--            [443]  = { "192.168.145.7", 443}
 --           }
 
 --UDP Proxy configuration
-udpproxy_tobackend_addr = "192.168.2.75" --Local address to communicate to backends with. Mandatory, if "udpproxy" is configured.
+udpproxy_tobackend_addr = "192.168.145.7" --Local address to communicate to backends with. Mandatory, if "udpproxy" is configured.
 udpproxy = { -- [<listen port>] = { "<backend IP>", <backend Port> },
-            [64000] = { "192.168.2.75", 55555 },
+            [64000] = { "192.168.145.7", 55555 },
             [533]   = { "8.8.4.4", 53},
             [534]   = { "8.8.8.8", 53},
            }
