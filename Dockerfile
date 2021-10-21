@@ -30,14 +30,22 @@ RUN apt-get install -y \
     python3-pip \
     iptables \
     git \
-    sudo \
-    python-apt \
+    sudo
+# Apt-get update necessary
+RUN apt-get update && \
+    apt-get install -y \
     python3-distutils-extra \
     python3-apt \
-    telnet
+    lsb-release \
+    lsb-core \
+    rsyslog \
+    dnsutils
     
+RUN sed -i '/imklog/s/^/#/' /etc/rsyslog.conf
+
 RUN pip3 install psutil setuptools luaparser split
 
+# RUN echo "-w /usr/bin/docker -p wa\n-w /var/lib/docker -p wa\n-w /etc/docker -p wa\n-w /lib/systemd/system/docker.service -p wa\n-w /lib/systemd/system/docker.socket -p wa\n-w /etc/default/docker -p wa\n-w /etc/docker/daemon.json -p wa\n-w /usr/bin/docker-containerd -p wa\n-w /usr/bin/docker-runc -p wa" | tee -a /etc/audit/audit.rules >/dev/null
 ADD . /madcat
 
 RUN cd /madcat && \
@@ -45,7 +53,8 @@ RUN cd /madcat && \
     make
 
 RUN cd /madcat && \
-    cp -r etc/madcat /etc/ && \
+    mkdir /etc/madcat && \
+    cp etc/madcat/config.lua /etc/madcat && \
     mkdir /opt/portmonitor && \
     cp scripts/run_madcat.sh /opt/portmonitor && \
     cp bin/tcp_ip_port_mon /opt/portmonitor && \
@@ -55,6 +64,7 @@ RUN cd /madcat && \
     cp bin/enrichment_processor.py /opt/portmonitor && \
     cp bin/tcp_ip_port_mon_postprocessor.py /opt/portmonitor && \
     cp -r bin/monitoring /opt/portmonitor/ && \
+    cp etc/madcat/monitoring_config.py /opt/portmonitor/monitoring && \
     chmod +x /opt/portmonitor/tcp_ip_port_mon && \
     chmod +x /opt/portmonitor/udp_ip_port_mon && \
     chmod +x /opt/portmonitor/raw_mon && \
@@ -65,15 +75,8 @@ RUN cd /madcat && \
     chmod +x /opt/portmonitor/tcp_ip_port_mon_postprocessor.py && \
     chmod a+x /opt/portmonitor/run_madcat.sh 
 
-RUN \
-    groupadd --gid 999 user && \
-    useradd --uid 999 --gid user -G sudo -m --shell /bin/bash user && \
-    sed -i /etc/sudoers -re 's/^%sudo.*/%sudo ALL=(ALL:ALL) NOPASSWD: ALL/g' && \
-    sed -i /etc/sudoers -re 's/^root.*/root ALL=(ALL:ALL) NOPASSWD: ALL/g' && \
-    sed -i /etc/sudoers -re 's/^#includedir.*/## **Removed the include directive** ##"/g' && \
-    echo "user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
-    echo "Customized the sudoers file for passwordless access to the user user!" && \
-    echo "user user:";  su - user -c id
+RUN addgroup --gid 999 user
+RUN adduser --system --no-create-home --uid 999 --disabled-password --disabled-login --gid 999 user
 
 RUN mkdir /var/run/madcat && \
     mkdir /data

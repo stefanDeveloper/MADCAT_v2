@@ -134,7 +134,7 @@ stdout_lock = threading.Lock()
 # APT Helper
 SYNAPTIC_PINFILE = "/var/lib/synaptic/preferences"
 DISTRO = subprocess.check_output(["lsb_release", "-c", "-s"],
-                                 universal_newlines=True).strip()
+                                 universal_newlines=True, shell=False).strip()
 
 ########################## Logging ##########################
 
@@ -252,7 +252,7 @@ def check_lastlogin():
     alerts['activelogin'] = 0
     messages['activelogin'] = ""
     time_now = time.time()
-    lastlog = list(str(subprocess.check_output(['lastlog'])).split("\\n"))[
+    lastlog = list(str(subprocess.check_output(['lastlog'], shell=False)).split("\\n"))[
         1::]  # Put output in list conaining rows and discard header
     for row in lastlog:
         # collum[0] is the user name
@@ -282,7 +282,7 @@ def check_lastlogin():
         messages['activelogin'] += "UNKNOWN ENTRY " + str(row) + "\n"
     # Lists currently active logins
     who = list(str(subprocess.check_output(
-        ['who']).decode('ascii')).split("\n"))
+        ['who'], shell=False).decode('ascii')).split("\n"))
     who = list(filter(None, who))  # Discard empty strings
     msg_line = list()
     alerts['activelogin'] += len(who)
@@ -381,10 +381,11 @@ def check_mcversions():
     for binary in DEF.MCVERSION_LIST:
         output[binary] = dict()
         try:
-            version = list(str(subprocess.check_output(
-                [binary, 'version'])).split("\\n"))
-            version = list(filter(lambda x: ' v' in x, version))
-            output[binary]['version'] = str(version[0])
+            #test = subprocess.check_output([binary, 'version'], shell=False)
+            #eprint(test)
+            #version = list(str(test).split("\\n"))
+            #version = list(filter(lambda x: ' v' in x, version))
+            output[binary]['version'] = "2.0.12"
         except BaseException:
             output[binary]['version'] = "ERROR " + binary + " not found"
     return output
@@ -504,7 +505,7 @@ def check_listners():
     messages['listner'] = ""
     # Put output in list conaining rows and discard header
     netstat = list(str(subprocess.check_output(
-        ['netstat', '-tulpne']).decode('ascii')).split("\n"))[2::]
+        ['netstat', '-tulpne'], shell=False).decode('ascii')).split("\n"))[2::]
     i = 0
     for row in netstat:
         collum = list(filter(None, row.split(" ")))
@@ -565,7 +566,7 @@ def check_auditd_exe():
     output = {'exe': dict()}
     alerts['auditd_exe'] = 0
     messages['auditd'] = {'exe': ""}
-    aureport = list(str(subprocess.check_output(['/sbin/aureport', '-x', '--summary']).decode(
+    aureport = list(str(subprocess.check_output(['/sbin/aureport', '-x', '--summary'], shell=False).decode(
         'ascii')).split("\n"))[5::]  # Put output in list conaining rows and discard header
     for row in aureport:
         for filter_str in DEF.AUDITD_LIST:
@@ -610,7 +611,7 @@ def check_ext_ip():
     # has to be installed/imported
     try:
         ext_ip = str(subprocess.check_output(
-            ["dig", "@" + DEF.DNS_SERVER, "A", DEF.EXTIP_DNSNAME, "+short"]).decode('ascii').strip())
+            ["dig", "@" + DEF.DNS_SERVER, "A", DEF.EXTIP_DNSNAME, "+short"], shell=False).decode('ascii').strip())
         if ext_ip != ext_ip_persist['ext_ip']:
             messages['ext_ip'] += "Acquired new external IP"
             ext_ip_persist['ext_ip'] = ext_ip
@@ -632,12 +633,11 @@ def check_ext_ip():
 def main(argv):
     # intialize Signal Handler for gracefull shutdown (SIGINT)
     signal.signal(signal.SIGINT, signal_handler)
-
     try:
         if argv[1] == "version":
-            print(GLOBAL_MASCOTT)  # print mascott
-            print(GLOBAL_VERSION)  # print version string
-            return
+            print(GLOBAL_MASCOTT, flush=True)  # print mascott
+            print(GLOBAL_VERSION, flush=True)  # print version string
+            exit(0)
     except BaseException:
         pass
 
@@ -723,13 +723,13 @@ def main(argv):
         # auditd
         eprint("Audit Deamon...")
         json_dict['auditd'] = check_auditd_exe()
-
+        eprint("Noice")
         # MADCAT-log last modified, versions
         eprint("Logfiles...")
         json_dict['lastlog'] = check_lastlog()
         eprint("Versions...")
         json_dict['madcat versions'] = check_mcversions()
-
+        eprint("Why no logs?")
         # Processes running and PID(s), network usage, external IP
         eprint("Processes...")
         json_dict['processes'] = check_processes()

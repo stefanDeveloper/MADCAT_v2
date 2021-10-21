@@ -60,13 +60,13 @@ proxy_wait_restart = "2" --optional: time to wait before a crashed TCP proxy res
 raw_pcap_filter_exp = "(not ip6 multicast) and inbound and ip6"
 
 --TCP Proxy configuration
-tcpproxy = { -- [<listen port>] = { "<backend IP>", <backend Port> },
-            [222]   = { "192.168.2.75", 22 },
-            [2222]  = { "192.168.2.75", 222 },
-            [80]    = { "192.168.2.75", 8080 },
-            [6400] = { "192.168.2.75", 6400 },
-            [443]  = { "192.168.2.75", 443}
-           }
+--tcpproxy = { -- [<listen port>] = { "<backend IP>", <backend Port> },
+--            [222]   = { "192.168.2.75", 22 },
+--            [2222]  = { "192.168.2.75", 222 },
+--            [80]    = { "192.168.2.75", 8080 },
+--            [6400] = { "192.168.2.75", 6400 },
+--            [443]  = { "192.168.2.75", 443}
+--           }
 
 --UDP Proxy configuration
 udpproxy_tobackend_addr = "192.168.2.75" --Local address to communicate to backends with. Mandatory, if "udpproxy" is configured.

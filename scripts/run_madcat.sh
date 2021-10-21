@@ -3,6 +3,7 @@ if ! [ "$(id -u)" = 0 ]; then
    echo "The script need to be run as root." >&2
    exit 1
 fi
+service rsyslog start
 
 #Set iptables rules for TCP- and UDP-Modules
 iptables -t nat -A PREROUTING -i enp5s0 -p tcp --dport 1:65534 -j DNAT --to 192.168.2.75:65535
